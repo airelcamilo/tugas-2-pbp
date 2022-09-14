@@ -9,7 +9,7 @@ Bagan yang berisi *request client* ke web aplikasi berbasis Django beserta respo
 
 ![bagan-request-response-django](./bagan-request-response-django.png)
 
-Ketika pengguna meminta suatu halaman website, URL router `urls.py` akan mencocokan *path* permintaan tersebut dengan pola URL yang tersedia. Apabila ada yang cocok, `urls.py` akan meneruskannya ke `views.py` yang sesuai. `views.py` merupakan logika dari suatu halaman web yang akan memanggil `models.py` apabila membutuhkan *read/write* data dari *database*. Setelah permintaan diproses, `views.py` akan memetakan data dari *database* ke dalam berkas template `HTML`. Barulah template `HTML` tersebut, ditampilkan ke pengguna sebagai respons.
+Ketika pengguna meminta suatu halaman website, URL router `urls.py` akan mencocokan *path* permintaan tersebut dengan pola URL yang tersedia. Apabila ada yang cocok, `urls.py` akan meneruskannya ke `views.py` yang sesuai. `views.py` merupakan logika dari suatu halaman web yang akan memanggil `models.py` apabila membutuhkan *read/write* data dari *database*. Setelah permintaan diproses, `views.py` akan memetakan data dari *database* ke dalam berkas template `HTML`. Barulah template `HTML` tersebut dapat ditampilkan ke pengguna sebagai respons.
 
 ***
 ## Alasan Menggunakan Virtual Environment
@@ -20,7 +20,7 @@ Manfaat menggunakan virtual environment, yaitu:
 
 2. Agar *package* yang di install hanya *package* yang diperlukan saja. Jika tidak menggunakan virtual environment, *package* yang dibutuhkan di projek lain mungkin dapat memengaruhi pembuatan aplikasi Django secara tidak sengaja.
 
-Sebenarnya pembuatan aplikasi Django tanpa menggunakan virtual environment dibolehkan, tetapi tidak dianjurkan agar dapat meng-*install* lebih dari satu versi *package*, terhindar dari masa;ah *dependencies*, dan *package* yang di-*install* seperlunya saja sehingga tidak dipengaruhi *package* lain.
+Sebenarnya pembuatan aplikasi Django tanpa menggunakan virtual environment dibolehkan, tetapi tidak dianjurkan karena kita jadi tidak dapat meng-*install* lebih dari satu versi *package*, akan muncul masalah *dependencies*, dan *package* yang telah di-*install* untuk projek lain dapat memengaruhi jalannya Django.
 
 ***
 ## Implementasi
