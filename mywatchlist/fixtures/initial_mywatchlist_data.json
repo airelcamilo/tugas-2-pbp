@@ -1,0 +1,123 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Everything Everywhere All at Once",
+            "rating": 5,
+            "release_date": "2022-05-13",
+            "review": "Michelle Yeoh and the rest of the cast and crew KNOCK this mind-bending, multi-universe film right out of the entirety of space and time, and take our minds, funny bones and our hearts along for the ride."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": false,
+            "title": "The Batman",
+            "rating": 4,
+            "release_date": "2022-04-04",
+            "review": "Detective Batman at its peak! Great storyline. Just as dark a universe as we've come to expect from DC. The gloomy, gritty, dark tone of this film is exactly what I wanted. When you think the movie is over, there's more. Beautiful cinematography. Great score."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Doctor Strange in the Multiverse of Madness",
+            "rating": 4,
+            "release_date": "2022-05-05",
+            "review": "While this film has a more grim tone than its predecessors it's still a Marvel film at heart. Of course it would take Sam Raimi to find the perfect blend of comic-book-movie, horror, fantasy and slapstick. He might be working with a massive budget now, but the man stays true to his roots and sticking with what he knows pays off."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "watched": false,
+            "title": "SPYxFAMILY",
+            "rating": 4,
+            "release_date": "2022-04-09",
+            "review": "This anime is amazing! Perfect combo of comedy and action! Even if you dont like anime, come here for a fun, hilarious, action filled ride! (Also, parents, it's a 13 year old reviewing this, it's ok to show to your kids. Just please be there, just in case.)"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Big Mouth",
+            "rating": 5,
+            "release_date": "2022-07-29",
+            "review": "TBH I can into this show with low expectations. Starts off just like typical dramas, but boy, do the plot twists blow you mind and have you applauding. The actors are great too. You find yourself running home to see the next episode. Of courses there are great performances to pull all this off."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Encanto",
+            "rating": 4,
+            "release_date": "2021-11-24",
+            "review": "This is a magical movie. I really like these characters and the mystery is interesting. It kept me intrigued and then the movie hits me with that revelation. That's a powerful scene. It's a scene of a reality that is more powerful than most other family-friendly animated movies are willing to go. It's the step that puts this onto another level."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "JoJo's Bizarre Adventure",
+            "rating": 5,
+            "release_date": "2012-10-05",
+            "review": "JoJo's Bizarre Adventure has been a ride for me. I got into it, because of it's massive Impact on the anime community as a whole and how it bends the rules of traditional anime and makes me laugh and sob at the drop of a checkered hat. Stories in traditional \"shonen\" or \"for boys\" anime fall into obvious tropes that JoJo does not. Normal anime will follow a main character (mostly male) trying to solve a problem through fights. JoJo follows that guideline with some major improvements."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "House of the Dragon",
+            "rating": 5,
+            "release_date": "2022-08-22",
+            "review": "Great balance between pacing, nudity and violence, while also having great acting and VFX, end up making this easily comparable to peak Game of Thrones, by the end of the first season, it might even triumph season 1 of it's predecessor/sequel."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "12 Monkeys",
+            "rating": 5,
+            "release_date": "2015-02-27",
+            "review": "In a nutshell, this is, hands-down, one of the greatest shows - aside from Breaking Bad - that I have ever watched. It is even better than Firefly (another of my favorite series), ten times over. It is an utter shame that lazy critics never took the time to actually watch this spectacular series before reaching into what could only be drawers-full of unpublished reviews, picking a negative one at random and calling it their two cents."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Dark",
+            "rating": 5,
+            "release_date": "2017-12-01",
+            "review": "THIS is the best flipping tv show I've seen since true detective's first season. I can't believe how good it is. Beautiful photography, scenarios, costumes, thrilling atmospheric music (gives the chills!!), amazing performances and above everything: perfect beautifully (wunderbar!) storyline."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 11,
+        "fields": {
+            "watched": false,
+            "title": "My Neighbour Totoro",
+            "rating": 4,
+            "release_date": "1989-11-17",
+            "review": "From the brilliant \"Walt Disney of Japan\", Hayao Miyazaki, comes a wonderful soothing film that everyone will simply embrace. Featuring stunning animation, endearing personable characters, and a heart-tugging storyline that's simple, enchanting, and even dramatic."
+        }
+    }
+]

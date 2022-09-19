@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Tugas 2 Assignment PBP/PBD</h1>
+
+<h5>Name: </h5>
+<p>{{name}}</p>
+
+<h5>Student ID: </h5>
+<p>{{id}}</p>
+
+{% if watched_a_lot %}
+    <h3>Selamat, kamu sudah banyak menonton!</h3>
+{% else %}
+    <h3>Wah, kamu masih sedikit menonton!</h3>
+{% endif %}
+
+<table>
+    <tr>
+        <th>Watched/Haven't Watched</th>
+        <th>Title</th>
+        <th>Rating</th>
+        <th>Release Date</th>
+        <th>Review</th>
+    </tr>
+    {% comment %} Menampilkan setiap data item di list_mywatchlist {% endcomment %}
+    {% for item in list_mywatchlist %}
+    <tr>
+        {% if item.watched == "1" %}
+            <td>Watched</td>
+        {% elif item.watched == "0" %}
+            <td>Haven't Watched</td>
+        {% endif %}
+        <td>{{item.title}}</td>
+        <td>{{item.rating}}</td>
+        <td>{{item.release_date}}</td>
+        <td>{{item.review}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

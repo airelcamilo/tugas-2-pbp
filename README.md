@@ -1,4 +1,132 @@
-# Lab 1 Assignment PBP
+# Tugas 2 Assignment PBP
+
+### Link HTML: https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/html
+### Link JSON: https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/json
+### Link XML: https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/xml
+
+***
+
+## Perbedaan JSON, XML, dan HTML
+| JSON | XML | HTML |
+| ----------- | ----------- | ----------- |
+| Sebuah data format | Sebuah bahasa pemrograman extensible markup | Sebuah bahasa pemrograman markup |
+| Berdasarkan bahasa pemrograman JavaScript | Berasal dari SGML | Berasal dari SGML |
+| Digunakan untuk menyimpan dan transfer data | Digunakan untuk menyimpan dan transfer data | Digunakan untuk menampilkan data  |
+| Menggunakan *key-value pair* untuk merepresentasikan data  | Menggunakan *user defined tags* untuk merepresentasikan data | Menggunakan *predefined tags* untuk menampilkan data |
+| Mudah dibaca | Susah dibaca | Susah dibaca |
+
+## Mengapa Memerlukan *Data Delivery*
+Diperlukannya *data delivery* ketika implementasi sebuah platform karena ada saatnya kita perlu mengirimkan data yang kita buat dari satu *stack* ke *stack* yang lainnya.
+
+## Implementasi
+
+1. Membuat Aplikasi `mywatchlist`
+   
+   Membuat aplikasi baru di Django dengan nama `mywatchlist` dengan mengetik kode:
+   ```shell
+   python manage.py startapp mywatchlist
+   ```
+
+   Kemudian membuka `settings.py` di folder `project_django` dan menambahkan aplikasi `mywatchlist` ke dalam variabel `INSTALLED_APPS`.
+
+   ```shell
+   INSTALLED_APPS = [
+      ...,
+      'mywatchlist',
+   ]
+   ```
+
+2. Menambah Path `mywatchlist`
+   
+   Menambahkan potongan kode di bawah ini di `project_django\urls.py`  agar dapat mengakses http://localhost:8000/mywatchlist:
+   ```shell
+   ...
+   path('mywatchlist/', include('mywatchlist.urls'))
+   ...
+   ``` 
+
+3. Membuat Model `MyWatchlist`
+   
+   Membuat class `MyWatchlist` di `models.py` dan di dalamnya ada beberapa atribut, yaitu `watched` dengan tipe `Boolean`, `title` dengan tipe `Character` dan panjang kata maksimum 50 kata, `rating` sebuah `Integer`, atribut `release_date` bertipe `Date`, dan `review` bertipe `Text`.
+   ```shell
+   class MyWatchList(models.Model):
+      watched = models.BooleanField()
+      title = models.CharField(max_length=50)
+      rating = models.IntegerField()
+      release_date = models.DateField()
+      review = models.TextField()
+   ```
+
+***
+
+## Mengakses URL dengan Postman
+
+***
+
+## Menambah Unit Test
+Di dalam `mywatchlist\tests.py` menambah potongan kode di bawah ini untuk mengecek apakah setiap URL, yaitu ` http://localhost:8000/mywatchlist/html`, ` http://localhost:8000/mywatchlist/xml`, ` http://localhost:8000/mywatchlist/json` ada atau tidak. Apabila ada path url tersebut, maka akan mengembalikan respon `HTTP 200 OK`.
+
+Khusus untuk HTML agar tidak error, hapus `  <link rel="stylesheet" href="{% static 'css/style.css' %}">` di `project_django\templates\base.html`.
+```shell
+from django.test import TestCase, Client
+
+class MyWatchListTest(TestCase):
+    def test_html_url_exists(self):
+        response = Client().get('/mywatchlist/html/')
+        self.assertEqual(response.status_code, 200)
+    
+    def test_xml_url_exists(self):
+        response = Client().get("/mywatchlist/xml/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_json_url_exists(self):
+        response = Client().get("/mywatchlist/json/")
+        self.assertEqual(response.status_code, 200)
+```
+
+***
+
+## Bonus
+Di dalam `views.py` pertama-tama, masukkan semua data film yang ditonton dan yang belum ditonton ke variabelnya masing-masing, yaitu `data_watched` dan `data_havent_watched`. Kemudian mencari apakah jumlah data film yang ditonton lebih besar atau sama dengan jumlah data film yg belum ditonton ke variabel `watched_a_lot`.
+```shell
+data_watched = MyWatchList.objects.filter(watched=True)
+data_havent_watched = MyWatchList.objects.filter(watched=False)
+watched_a_lot = data_watched.count() >= data_havent_watched.count()
+```
+
+Variabel `watched_a_lot` bertipe `Boolean` dimasukkan ke dictionary `context` agar di-*render* ke *template* `mywatchlist.html`
+```shell
+context = {
+        ...
+        'watched_a_lot': watched_a_lot,
+        ...
+    }
+    return render(request, "mywatchlist.html", context)
+```
+
+Terakhir, di `mywatchlist.html` buat kode *if-statement*-nya.
+```shell
+{% if watched_a_lot %}
+    <h3>Selamat, kamu sudah banyak menonton!</h3>
+{% else %}
+    <h3>Wah, kamu masih sedikit menonton!</h3>
+{% endif %}
+```
+
+***
+
+## Credits
+Sumber jawaban perbedaan JSON, XML, dan HTML [HTML vs XML](https://www.geeksforgeeks.org/html-vs-xml/) dan [Difference between JSON and XML](https://www.geeksforgeeks.org/difference-between-json-and-xml/)
+
+Sumber jawaban *data delivery* [Lab 2 - PBP Ganjil 22/23](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-2)
+
+***
+
+## Previous Assignment
+<details>
+  <summary>Tugas 1</summary>
+
+# Tugas 1 Assignment PBP
 
 ### Link Heroku App: https://tugas-2-pbp-airel.herokuapp.com/katalog
 
@@ -110,3 +238,5 @@ Memanfaatkan template dari [Github PBP Ganjil 22/23](https://github.com/pbp-fasi
 Sumber jawaban pertanyaan nomor 1 [Django: Request/Response Cycle](https://medium.com/@ksarthak4ever/django-request-response-cycle-2626e9e8606e) dan [Lab 1 - PBP Ganjil 22/23](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-1)
 
 Sumber jawaban pertanyaan nomor 2 [Real Python - Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/#why-do-you-need-virtual-environments)
+
+</details>
