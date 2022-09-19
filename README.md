@@ -57,6 +57,108 @@ Diperlukannya *data delivery* ketika implementasi sebuah platform karena ada saa
       review = models.TextField()
    ```
 
+4. Menambahkan Minimal 10 Data Objek `MyWatchlist`
+
+   Membuat folder baru bernama `fixtures` dan membuat file di dalam folder tersebut bernama `initial_mywatchlist_data.json`. Kemudian, masukkan data-data beserta atributnya. Jangan lupa untuk menjalankan beberapa perintah di bawah untuk migrasi skema model dan memasukkan data `initial_mywatchlist_data.json` ke dalam *database* Django lokal.
+   ```shell
+   python manage.py makemigrations
+   python manage.py migrate
+   python manage.py loaddata initial_mywatchlist_data.json
+   ```
+
+5. Implementasi Fitur Penyajian Data
+
+   * HTML
+
+      Membuat kode di bawah ini di `views.py` untuk me-*render* gabungan dari file template HTML dengan `context` yang berisi semua data `MyWatchList`, nama, dan npm.
+      ```shell
+      from mywatchlist.models import MyWatchList
+
+      def show_html(request):
+         data = MyWatchList.objects.all()
+         context = {
+            'list_mywatchlist': data,
+            'name': 'Airel Camilo Khairan',
+            'id': '2106652581'
+         }
+         
+      return render(request, "mywatchlist.html", context)
+      ```
+
+      Kemudian, memetakan `context` ke dalam `templates\mywatchlist` dengan sintaks Django.
+      ```shell
+      <h5>Name: </h5>
+      <p>{{name}}</p>
+
+      <h5>Student ID: </h5>
+      <p>{{id}}</p>
+      ...
+         {% for item in list_mywatchlist %}
+         <tr>
+            {% if watched == "1" %}
+               <td>Watched</td>
+            {% elif watched == "0" %}
+               <td>Haven\'t Watched</td>
+            {% endif %}
+            <td>{{item.title}}</td>
+            <td>{{item.rating}}</td>
+            <td>{{item.release_date}}</td>
+            <td>{{item.review}}</td>
+         </tr>
+         {% endfor %}
+      ...
+      ```
+
+   * XML
+
+      Masih di dalam `views.py`, import HttpResponse dan Serializers lalu membuat sebuah fungsi untuk mengubah data `MyWatchList` ke dalam bentuk `XML` dengan mengeksekusi fungsi serialize. Kemudian, mengembalikan data ke dalam bentuk `HTTPResponse`
+      ```shell
+      from django.http import HttpResponse
+      from django.core import serializers
+
+      def show_xml(request):
+         data = MyWatchList.objects.all()
+         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+      ```
+
+   * JSON
+
+      Membuat sebuah fungsi untuk mengubah data `MyWatchList` ke dalam bentuk `JSON` dengan mengeksekusi fungsi serialize. Kemudian, mengembalikan data ke dalam bentuk `HTTPResponse`
+      ```shell
+      def show_json(request):
+         data = MyWatchList.objects.all()
+         return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      ```
+
+6. Membuat Routing URL
+
+   Di dalam `urls.py` implementasi routing URL ke http://localhost:8000/mywatchlist/html untuk mengakses dalam bentuk HTML, http://localhost:8000/mywatchlist/xml untuk mengakses dalam bentuk XML, dan http://localhost:8000/mywatchlist/json untuk mengakses dalam bentuk JSON
+   ```shell
+   from mywatchlist.views import show_html
+   from mywatchlist.views import show_xml
+   from mywatchlist.views import show_json
+
+   app_name = 'mywatchlist'
+
+   urlpatterns = [
+      path('html/', show_html, name='show_html'),
+      path('xml/', show_xml, name='show_xml'),
+      path('json/', show_json, name='show_json'),
+   ]
+   ```
+
+7. *Deployement* Ke Heroku
+
+   Karena *repository* ini sudah di *deploy* untuk Tugas 2, tidak perlu mengulang membuat aplikasi di Heroku dan menambah Secret ke *repository*. Tetapi ada beberapa hal yang perlu diubah:
+   * Di file `Procfile`
+   
+   Menambahkan potongan kode berikut.
+   ```shell
+   release: sh -c 'python manage.py migrate && python manage.py loaddata initial_catalog_data.json && python manage.py loaddata initial_mywatchlist_data.json'
+   ```
+   Tinggal mengakses halaman web sesuai url-nya, yaitu https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/html, https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/json, dan https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/xml
+
+
 ***
 
 ## Mengakses URL dengan Postman
