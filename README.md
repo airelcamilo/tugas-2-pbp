@@ -162,6 +162,17 @@ Diperlukannya *data delivery* ketika implementasi sebuah platform karena ada saa
 ***
 
 ## Mengakses URL dengan Postman
+1. HTML
+
+   ![postman-html](./postman-html.png)
+
+2. XML
+
+   ![postman-xml](./postman-xml.png)
+
+3. JSON
+
+   ![postman-json](./postman-json.png)
 
 ***
 
