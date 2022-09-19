@@ -8,8 +8,8 @@ def show_html(request):
     data = MyWatchList.objects.all()
 
     # Mencari jumlah film yang ditonton >= film yg belum ditonton
-    data_watched_count = MyWatchList.objects.filter(watched="True").count()
-    data_havent_watched_count = MyWatchList.objects.filter(watched="False").count()
+    data_watched_count = MyWatchList.objects.filter(watched=True).count()
+    data_havent_watched_count = MyWatchList.objects.filter(watched=False).count()
     watched_a_lot = data_watched_count >= data_havent_watched_count
     context = {
         'list_mywatchlist': data,

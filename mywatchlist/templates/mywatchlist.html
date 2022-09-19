@@ -27,9 +27,9 @@
     {% comment %} Menampilkan setiap data item di list_mywatchlist {% endcomment %}
     {% for item in list_mywatchlist %}
     <tr>
-        {% if item.watched == "1" %}
+        {% if item.watched %}
             <td>Watched</td>
-        {% elif item.watched == "0" %}
+        {% else %}
             <td>Haven't Watched</td>
         {% endif %}
         <td>{{item.title}}</td>
