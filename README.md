@@ -217,7 +217,7 @@ context = {
     return render(request, "mywatchlist.html", context)
 ```
 
-Terakhir, di `mywatchlist.html` buat kode *if-statement*-nya.
+Terakhir, di `mywatchlist.html` buat kode *if-statement*-nya di bawah Student ID.
 ```shell
 {% if watched_a_lot %}
     <h3>Selamat, kamu sudah banyak menonton!</h3>
@@ -225,6 +225,8 @@ Terakhir, di `mywatchlist.html` buat kode *if-statement*-nya.
     <h3>Wah, kamu masih sedikit menonton!</h3>
 {% endif %}
 ```
+
+Sehingga saat membuka https://tugas-2-pbp-airel.herokuapp.com/mywatchlist/html/, di bawah Student ID akan menampilkan pesan yang sesuai.
 
 ***
 
