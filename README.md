@@ -9,14 +9,14 @@
 ## Perbedaan JSON, XML, dan HTML
 | JSON | XML | HTML |
 | ----------- | ----------- | ----------- |
-| Sebuah data format | Sebuah bahasa pemrograman extensible markup | Sebuah bahasa pemrograman markup |
+| Sebuah data format | Sebuah bahasa extensible markup | Sebuah bahasa markup |
 | Berdasarkan bahasa pemrograman JavaScript | Berasal dari SGML | Berasal dari SGML |
 | Digunakan untuk menyimpan dan transfer data | Digunakan untuk menyimpan dan transfer data | Digunakan untuk menampilkan data  |
-| Menggunakan *key-value pair* untuk merepresentasikan data  | Menggunakan *user defined tags* untuk merepresentasikan data | Menggunakan *predefined tags* untuk menampilkan data |
-| Mudah dibaca | Susah dibaca | Susah dibaca |
+| Data direpresentasikan dengan *key-value pair* | Data direpresentasikan dengan *user defined tags* | Struktur halaman web direpresentasikan dengan *predefined tags* |
+| Menggunakan JSON.parse() dalam *parsing* JSON string| Menggunakan XML DOM untuk *looping* dokumen | Menggunakan HTML DOM untuk *looping* dokumen |
 
 ## Mengapa Memerlukan *Data Delivery*
-Diperlukannya *data delivery* ketika implementasi sebuah platform karena ada saatnya kita perlu mengirimkan data yang kita buat dari satu *stack* ke *stack* yang lainnya.
+Diperlukannya *data delivery* ketika implementasi sebuah platform karena ada saatnya kita memerlukan mengirim data yang kita punya dari satu *stack* ke *stack* yang lainnya. Ada tiga format data dari *data delivery*, yaitu HTML, XML, dan JSON.
 
 ## Implementasi
 
