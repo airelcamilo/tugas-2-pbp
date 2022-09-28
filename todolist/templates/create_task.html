@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Tambah Task Baru</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "create-task">
+    <h1>Tambah Task Baru</h1>  
+
+    <form method="POST" action={% url 'todolist:create_task'%}>
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>{{ form.title.label_tag }}</th>
+                <td>{{ form.title }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.description.label_tag }}</th>
+                <td>{{ form.description }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Tambah Task Baru"/></td>
+            </tr>
+        </table>
+    </form>
+</div>  
+
+{% endblock content %}

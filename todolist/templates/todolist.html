@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Tugas 4 Assignment PBP/PBD</h1>
+
+<h3>Username: {{user}}</h3>
+
+<button><a href="{% url 'todolist:create_task' %}">Tambah Task Baru</a></button>
+
+<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Change Status</th>
+        <th>Delete</th>
+    </tr>
+    
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.date}}</td>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        {% if task.is_finished %}
+            <td>Selesai</td>
+            <td><button><a href="{% url 'todolist:change_status' task.id %}">Belum Selesai</button></td>
+        {% else %}
+            <td>Belum Selesai</td>
+            <td><button><a href="{% url 'todolist:change_status' task.id %}">Selesai</button></td>
+        {% endif %}
+        <td><button><a href="{% url 'todolist:delete_task' task.id %}">Delete</button></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
