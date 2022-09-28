@@ -336,17 +336,25 @@ Alur data dari submisi yang dilakukan pengguna adalah sebagai berikut:
     ```
 
 8. *Deployement* ke Heroku
+    
     Karena *repository* ini sudah di *deploy* untuk Tugas sebelumnya, tidak perlu mengulang membuat aplikasi di Heroku dan menambah Secret ke *repository*. 
 
 9. Membuat 2 Akun Pengguna dan 3 Dummy Data
-    1. Akun pertama:
+    
+    * Akun pertama:
+        
         Username: `dummy`
-        Password: `dummy564`
+        
+        Password: `dummypass564`
+        
         Data: `[[Kerjain tugas PBP, Bentar lagi deadline!!], [Laundry. Baju mau habis], [Rapat, Ikut rapat Gladiatos]]`
 
-    2. Akun kedua:
+    * Akun kedua:
+        
         Username: `pran`
+        
         Password: `pransocool`
+        
         Data: `[[Beli whiskas, Buat kucing kesayangan], [Ke TA, Jemput adek nonton], [Belajar kuis StatProb, Biar dapet nilai 100]]`
 
 
