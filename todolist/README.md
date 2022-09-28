@@ -429,4 +429,8 @@ Alur data dari submisi yang dilakukan pengguna adalah sebagai berikut:
 
 # Credits
 
-Sumber pertanyaan pertama: [Django Documentation](https://www.stackhawk.com/blog/django-csrf-protection-guide/) dan [Stackhawk Django CSRF Protection](https://www.stackhawk.com/blog/django-csrf-protection-guide/)
+Sumber pertanyaan pertama: [Django Documentation](https://docs.djangoproject.com/en/4.1/ref/csrf/) dan [Stackhawk Django CSRF Protection](https://www.stackhawk.com/blog/django-csrf-protection-guide/)
+
+Sumber pertanyaan kedua: [Django Documentation](https://docs.djangoproject.com/en/4.1/topics/forms/)
+
+Sumber pertanyaan ketiga: [Slide Kuliah](https://scele.cs.ui.ac.id/pluginfile.php/161881/mod_resource/content/1/05%20-%20Form%2C%20Authentication%2C%20Session%2C%20and%20Cookie.pdf)
