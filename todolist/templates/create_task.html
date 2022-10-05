@@ -7,24 +7,28 @@
 {% block content %}  
 
 <div class = "create-task">
-    <h1>Tambah Task Baru</h1>  
+    <h1 class="pb-2">Tambah Task Baru</h1>  
 
-    <form method="POST" action={% url 'todolist:create_task'%}>
+    <form method="POST" action={% url 'todolist:create_task'%}  class="card">
         {% csrf_token %}
         <table>
-            <tr>
-                <th>{{ form.title.label_tag }}</th>
+            <tr style="height: 30px;">
+                <td>{{ form.title.label_tag }}</td>
+            </tr>
+            <tr style="height: 50px;">
                 <td>{{ form.title }}</td>
             </tr>
-            <tr>
-                <th>{{ form.description.label_tag }}</th>
+            <tr style="height: 40px;">
+                <td>{{ form.description.label_tag }}</td>
+            </tr>
+            <tr style="height: 50px;">
                 <td>{{ form.description }}</td>
             </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Tambah Task Baru"/></td>
-            </tr>
         </table>
+
+        <div class="d-grid mt-4">
+            <input class="btn login_btn btn-outline-primary" type="submit" value="Tambah Task Baru"/>
+        </div>
     </form>
 </div>  
 

@@ -1,0 +1,86 @@
+body {
+    background: linear-gradient(216deg, rgba(255, 255, 255, 1) 0%, rgba(210, 210, 255, 1) 96%) no-repeat fixed;
+}
+
+form {
+    padding: 20px;
+}
+
+nav {
+    box-shadow: 0px 0px 20px -10px rgb(60, 60, 60);
+    background-color: rgb(183, 183, 255);
+}
+
+.card {
+    background-color: rgb(183, 183, 255);
+}
+
+.login,
+.tasks,
+.create-task {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.login,
+.create-task {
+    height: 100vh;
+    margin: 0 auto auto auto;
+    flex-direction: column;
+}
+
+.login>* {
+    margin-bottom: 0.6rem;
+}
+
+.navbar-brand {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title>h1 {
+    margin: 50px 0px 30px 0px;
+}
+
+.tasks {
+    margin: 2rem;
+    flex-direction: row;
+}
+
+.tasks>* {
+    padding: 20px;
+}
+
+.task {
+    width: 18rem;
+    height: 16rem;
+    overflow-y: auto;
+    background-color: rgb(183, 183, 255);
+    transition: all .1s ease-in-out;
+}
+
+.task:hover,
+.task:active {
+    background-color: rgb(173, 173, 255);
+    transform: scale(1.01);
+}
+
+@media only screen and (max-width: 705px) {
+    .task {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .create-task>.card {
+        width: 70%;
+    }
+
+    .navbar-brand {
+        max-width: 200px;
+    }
+}

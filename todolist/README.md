@@ -1,3 +1,265 @@
+# Tugas 5 Assignment PBP
+
+### Link : tugas-2-pbp-airel.herokuapp.com/todolist
+
+***
+
+## Perbedaan Inline, Internal, External CSS
+
+Perbedaan:
+| Inline | Internal | External |
+| --- | --- | --- |
+| Menambahkan CSS style langsung di elemen HTML, contoh: <br>`<p style="color: red;"></p>` | Menambahkan CSS style dalam tag `<style>` dalam `<head>`, contoh: <br>`<style type="text/css">h1{margin: 20px}</style>`| Menambah CSS style dalam file eksternal `.css` dan di `<head>` HTML ditambahkan link yang merujuk ke file tersebut `<link rel="stylesheet" type="text/css" href="style.css" />`.
+
+1. Inline CSS
+
+    * Kelebihan: <br>Dapat dengan mudah menambahkan style CSS ke dalam elemen HTML. 
+    <br>
+    Tidak perlu membuat file CSS baru.
+
+    * Kekurangan: <br>Menambah style CSS ke setiap elemen HTML memakan waktu yang lama.<br>Ukuran file HTML akan menjadi besar.
+
+2. Internal CSS
+
+    * Kelebihan:<br>Dapat menggunakan ID dan Class Selectors dalam menambahkan style.<br>Tidak perlu membuat file baru.
+
+    * Kekurangan: <br>Ukuran file HTML akan menjadi besar.
+
+3. External CSS
+
+    * Kelebihan: <br> Style disimpan di file yang berbeda sehingga kode HTML lebih bersih dan ukuran lebih kecil. <br> File `.css` dapat digunakan untuk banyak file HTML.
+
+    * Kekurangan: <br> Halaman web akan ditampilkan dengan benar saat file CSS eksternal dimuat.
+
+***
+
+### Macam-Macam Tag HTML
+
+| Tag | Deskripsi | Tag | Deskripsi |
+| --- | --- | --- | --- |
+| `<html>` | Membuat dokumen HTML |  `<br>` | Membuat jeda baris |
+| `<title>` | Membuat judul halaman | `<!--...-->` | Membuat komentar |
+| `<body>` | Membuat tubuh halaman | `<img>` | Memuat gambar |
+| `<h1> - <h6>` | Membuat heading | `<a>` | Membuat *hyperlink* | 
+| `<p>` | Membuat paragraf | `<table>` | Membuat tabel |
+| `<ul>` | Membuat *unordered list* | `<tr>` | Membuat baris dalam tabel |
+| `<ol>` | Membuat *ordered list* | `<th>` | Membuat sel *header* dalam tabel |
+| `<li>` | Membuat item *list* | `<td>` | Membuat sel data dalam tabel |
+| `<div>` | Membuat generik kontainer | `<nav>` | Membuat *navigation bar* |
+| `<style>` | Memuat kode CSS | `<script>` | Membuat script sisi klien (JavaScript) |
+| `<header>` | Membuat *header* | `<footer>` | Membuat *footer* |
+| `<section>` | Membuat bagian | `<article>` | Membuat artikel |
+| `<aside>` | Membuat konten yang terkait secara tidak langsung dengan konten utama | `<link>` | Membuat hubungan antara dokumen dengan file eksternal |
+
+Dan masih banyak tag yang lain ...
+
+***
+
+## Macam-Macam CSS Selector
+
+1. Elemen Selector
+
+    Memilih elemen HTML berdasarkan nama elemen, contoh:
+    <br>```p {color: blue;}```
+
+2. ID Selector
+
+    Memilih elemen HTML berdasarkan id elemen dengan menulis #{nama-id}. Id merupakan atribut yang unik untuk setiap elemen, contoh:
+    <br>```#username {text-align: center;}```
+
+3. Class Selector
+
+    Memilih elemen HTML berdasarkan class elemen dengan menulis .{nama-class}. Class merupakan atribut yang dapat dimasukkan ke lebih dari satu elemen, contoh:
+    <br>```.card {display: flex;}```
+
+4. Universal Selector
+
+    Memilih setiap elemen yang ada di dokumen HTML, contoh:
+    <br>```* {background-color: green;}```
+
+5. Grouping Selector
+
+    Mengelompokkan semua elemen HTML yang memiliki *style* yang sama.
+    <br>```h1, p {color: red;}```
+
+***
+
+## Implementasi No 1
+1. Background
+
+    Mengubah background menjadi linear gradient. 
+    `body {background: linear-gradient(216deg, rgba(255, 255, 255, 1) 0%, rgba(210, 210, 255, 1) 96%) no-repeat fixed;}`
+
+2. Elemen yang memiliki class `login`, `tasks`, dan `create-task` menggunakan pengaturan layout *flex* dan dapat *wrap*. Kemudian, setiap anak elemen yang ada di dalamnya dibuat berada di tengah.
+    ```shell
+    .login, .tasks, .create-task {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    ```
+
+3. Mengubah margin dan arah *flex* yang diberlakukan pada elemen yang memiliki class `login`, `tasks`, dan `create-task`. Elemen `login` dan `create-task` berarah kolom dan `tasks` berarah baris.
+    ```shell
+    .login, .create-task {
+        height: 100vh;
+        margin: 0 auto auto auto;
+        flex-direction: column;
+    }
+    .tasks {
+        margin: 2rem;
+        flex-direction: row;
+    }
+    ```
+
+4. Menambahkan class `card` ke dalam form login, form register, form menambah task baru, dan setiap task. 
+    Class `card` adalah custom class style dari Bootstrap untuk membuat kartu. Lalu, saya ubah warna background dari kartu tersebut.
+    ```shell
+    .card {
+        background-color: rgb(183, 183, 255);
+    }
+    ```
+
+5. Menggunakan custom style tombol dari Bootstrap untuk semua tombol yang dibuat. Caranya dengan menambahkan clas `btn` dan `btn-{warna}` atau `btn-outline-{warna}`. Dokumentasi lebih lengkap [di sini](https://getbootstrap.com/docs/4.0/components/buttons/)
+
+6. Mengubah tinggi baris tabel di `login.html`, `register.html`, dan `create_task.html` dan menambahkan class `form-control` di setiap input `create_task.html` dengan mengubah class `CreateTask` di `forms.py`.
+    ```shell
+    <table>
+        <tr style="height: 30px;">
+            <td>{{ form.title.label_tag }}</td>
+        </tr>
+        ...
+    ```
+    ```shell
+    class CreateTask(forms.ModelForm):
+        def __init__(self, *args, **kwargs):
+            super(CreateTask, self).__init__(*args, **kwargs)
+            for field in self.fields.values():
+                field.widget.attrs['class'] = 'form-control'
+                field.required = False
+    ```
+
+7. Memasukkan class `card` yang sesuai untuk setiap elemen `task` di `todolist.html`. Dokumentasi lebih lengkap [di sini](https://getbootstrap.com/docs/4.0/components/card/)
+    ```shell
+    Di todolist.html
+    {% for task in tasks %}
+        <section class="task card m-3">
+            <h5 class="card-title">{{task.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{task.date}}</h6>
+            {% if task.is_finished %}
+                <p class="card-subtitle mb-2 text-muted">Selesai</p>
+            {% else %}
+                <p class="card-subtitle mb-2 text-muted">Belum Selesai</p>
+            {% endif %}
+            <p class="card-text">{{task.description}}</p>
+            <div class="btn-group mt-auto" role="group">
+                {% if task.is_finished %}
+                    <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Belum Selesai</a>
+                {% else %}
+                    <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Selesai</a>
+                {% endif %}
+                <a class="btn btn-danger" href="{% url 'todolist:delete_task' task.id %}">Delete</a>
+            </div>
+    </section>
+    {% endfor %}
+    ```
+
+8. Menambah *navigation bar* di `todolist.html` berisi *username* dan tombol *logout*.
+    ```shell
+    Di todolist.html
+    <nav class="navbar">
+        <span class="navbar-brand mx-1 mb-0 p-3 h5">Hello! {{user}}</span>
+        <a class="btn btn-outline-primary mx-3" href="{% url 'todolist:logout' %}">Logout</a>
+    </nav>
+    ```
+    ```shell
+    Di style.css
+    nav {
+        box-shadow: 0px 0px 20px -10px rgb(60, 60, 60);
+        background-color: rgb(183, 183, 255);
+    }
+    ```
+
+    Kemudian, menambahkan icon dan memindahkan title beserta tombol Tambah Task Baru ke tengah.
+    ```shell
+    Di base.html
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    ```
+    ```shell
+    Di todolist.html
+    <div class="text-center title">
+        <h1 class="text-center"><span class="material-symbols-outlined">checklist_rtl</span> My Todolist</h1>
+
+        <a class="btn btn-primary align-middle" href="{% url 'todolist:create_task' %}"><span class="material-symbols-outlined align-middle">add</span> Tambah Task Baru</a>
+    </div>
+    ```
+
+***
+
+# Implementasi No 2
+
+1. Saat ukuran layar <=705px, maka tinggi task akan sesuai dengan tinggi semua elemen dan panjang selayar. Jika ukuran layar > 700px, maka tinggi layar *fixed*, yaitu sebesar 16rem dan *scrollable*.
+    ```shell
+    @media only screen and (max-width: 705px) {
+        .task {
+            width: 100%;
+            height: auto;
+        }
+    }
+    ```
+
+2. Sementara saat ukuran kayar <=500px, mengubah lebar kartu di `create_task.html` dan mengubah ukuran elemen yang menggunakan class `navbar-brand`, yaitu *username* sehingga akan memotong teks *username* tersebut.
+    ```shell
+    .navbar-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    @media only screen and (max-width: 500px) {
+        .create-task>.card {
+            width: 70%;
+        }
+
+        .navbar-brand {
+            max-width: 200px;
+        }
+    }
+    ```
+
+***
+
+## Bonus
+Menambah ukuran dari card dan mengubah warna menjadi lebih gelap ketika melakukan hover pada card di halaman utama todolist.
+```shell
+.task {
+    width: 18rem;
+    height: 16rem;
+    overflow-y: auto;
+    background-color: rgb(183, 183, 255);
+    transition: all .1s ease-in-out;
+}
+.task:hover, .task:active {
+    background-color: rgb(173, 173, 255);
+    transform: scale(1.01);
+}
+```
+
+***
+
+## Credits
+Sumber jawaban pertanyaan nomor 1 [Types of CSS: Inline, External and Internal Definitions and Differences Explained
+](https://www.hostinger.com/tutorials/difference-between-inline-external-and-internal-css)
+
+Sumber jawaban pertanyaan nomor 2 [Tag-tag Pada HTML beserta Fungsinya](https://gilacoding.com/read/tag-tag-pada-html-beserta-fungsinya)
+
+Sumber jawaban pertanyaan nomor 3 [CSS Selectors](https://www.w3schools.com/css/css_selectors.asp)
+
+***
+
+<details>
+  <summary>Tugas 4</summary>
+
 # Tugas 4 Assignment PBP
 
 ### Link : tugas-2-pbp-airel.herokuapp.com/todolist
@@ -434,3 +696,4 @@ Sumber pertanyaan pertama: [Django Documentation](https://docs.djangoproject.com
 Sumber pertanyaan kedua: [Django Documentation](https://docs.djangoproject.com/en/4.1/topics/forms/)
 
 Sumber pertanyaan ketiga: [Slide Kuliah](https://scele.cs.ui.ac.id/pluginfile.php/161881/mod_resource/content/1/05%20-%20Form%2C%20Authentication%2C%20Session%2C%20and%20Cookie.pdf)
+</details>

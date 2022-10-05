@@ -2,39 +2,40 @@
 
 {% block content %}
 
-<h1>Tugas 4 Assignment PBP/PBD</h1>
+<nav class="navbar">
+    <span class="navbar-brand mx-1 mb-0 p-3 h5">Hello! {{user}}</span>
 
-<h3>Username: {{user}}</h3>
+    <!-- Handle logout -->
+    <a class="btn btn-outline-primary mx-3" href="{% url 'todolist:logout' %}">Logout</a>
+</nav>
 
-<button><a href="{% url 'todolist:create_task' %}">Tambah Task Baru</a></button>
+<div class="text-center title">
+    <h1 class="text-center"><span class="material-symbols-outlined">checklist_rtl</span> My Todolist</h1>
 
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+    <a class="btn btn-primary align-middle" href="{% url 'todolist:create_task' %}"><span class="material-symbols-outlined align-middle">add</span> Tambah Task Baru</a>
+</div>
 
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Change Status</th>
-        <th>Delete</th>
-    </tr>
-    
+<article class="tasks">
     {% for task in tasks %}
-    <tr>
-        <td>{{task.date}}</td>
-        <td>{{task.title}}</td>
-        <td>{{task.description}}</td>
+    <section class="task card m-3">
+        <h5 class="card-title">{{task.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{task.date}}</h6>
         {% if task.is_finished %}
-            <td>Selesai</td>
-            <td><button><a href="{% url 'todolist:change_status' task.id %}">Belum Selesai</button></td>
+            <p class="card-subtitle mb-2 text-muted">Selesai</p>
         {% else %}
-            <td>Belum Selesai</td>
-            <td><button><a href="{% url 'todolist:change_status' task.id %}">Selesai</button></td>
+            <p class="card-subtitle mb-2 text-muted">Belum Selesai</p>
         {% endif %}
-        <td><button><a href="{% url 'todolist:delete_task' task.id %}">Delete</button></td>
-    </tr>
+        <p class="card-text">{{task.description}}</p>
+        <div class="btn-group mt-auto" role="group">
+            {% if task.is_finished %}
+                <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Belum Selesai</a>
+            {% else %}
+                <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Selesai</a>
+            {% endif %}
+            <a class="btn btn-danger" href="{% url 'todolist:delete_task' task.id %}">Delete</a>
+        </div>
+    </section>
     {% endfor %}
-</table>
+</artic>
 
 {% endblock content %}
