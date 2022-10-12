@@ -9,33 +9,115 @@
     <a class="btn btn-outline-primary mx-3" href="{% url 'todolist:logout' %}">Logout</a>
 </nav>
 
+<!-- Modal -->
+<div class="modal fade" id="add-task" tabindex="-1" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Add Task</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    {% csrf_token %}
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+            
+                    <div class="d-grid mt-4">
+                        <input class="btn-add-task btn btn-outline-primary" type="submit" value="Add Task" data-bs-dismiss="modal"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="text-center title">
     <h1 class="text-center"><span class="material-symbols-outlined">checklist_rtl</span> My Todolist</h1>
 
-    <a class="btn btn-primary align-middle" href="{% url 'todolist:create_task' %}"><span class="material-symbols-outlined align-middle">add</span> Tambah Task Baru</a>
+    <a class="btn btn-primary align-middle" data-bs-toggle="modal" data-bs-target="#add-task"><span class="material-symbols-outlined align-middle">add</span>Add Task</a>
 </div>
 
 <article class="tasks">
-    {% for task in tasks %}
-    <section class="task card m-3">
-        <h5 class="card-title">{{task.title}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{task.date}}</h6>
-        {% if task.is_finished %}
-            <p class="card-subtitle mb-2 text-muted">Selesai</p>
-        {% else %}
-            <p class="card-subtitle mb-2 text-muted">Belum Selesai</p>
-        {% endif %}
-        <p class="card-text">{{task.description}}</p>
-        <div class="btn-group mt-auto" role="group">
-            {% if task.is_finished %}
-                <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Belum Selesai</a>
-            {% else %}
-                <a class="btn btn-success" href="{% url 'todolist:change_status' task.id %}">Selesai</a>
-            {% endif %}
-            <a class="btn btn-danger" href="{% url 'todolist:delete_task' task.id %}">Delete</a>
-        </div>
-    </section>
-    {% endfor %}
-</artic>
+</article>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+// Menggabungkan data task dengan sintaks HTML
+function makeTask(task) {
+    var html = "<section class='task-"+task.pk+" task card m-3'><h5 class='card-title'>"+task.fields.title+"</h5><h6 class='card-subtitle mb-2 text-muted'>"+task.fields.date+"</h6>";
+    if (task.fields.is_finished) {
+        html += "<p class='card-subtitle mb-2 text-muted'>Selesai</p>";
+    } else {
+        html += "<p class='card-subtitle mb-2 text-muted'>Belum Selesai</p>";
+    }
+    html += "<p class='card-text'>"+task.fields.description+"</p><div class='btn-group mt-auto' role='group'>";
+    if (task.fields.is_finished) {
+        html += "<a onclick='changeStatus("+task.pk+")' class='btn-hapus btn btn-success'>Belum Selesai</a>";
+    } else {
+        html += "<a onclick='changeStatus("+task.pk+")' class='btn-hapus btn btn-success'>Selesai</a>";
+    }
+    html += "<a onclick='deleteTask("+task.pk+")' class='btn btn-danger'>Delete</a></div></section>";
+    return html;
+}
+
+// Get task saat load
+$(document).ready(function(){
+    $.get("/todolist/json", function(data) {
+        $.each(data, function(index, task) {
+            $('.tasks').append(makeTask(task));
+        });
+    });
+});
+
+// Mengubah status task
+function changeStatus(pk) {
+    $.get("/todolist/change-status/"+pk, function(data) {
+        $.each(data, function(index, task) {
+            var html = "<h5 class='card-title'>"+task.fields.title+"</h5><h6 class='card-subtitle mb-2 text-muted'>"+task.fields.date+"</h6>";
+            if (task.fields.is_finished) {
+                html += "<p class='card-subtitle mb-2 text-muted'>Selesai</p>";
+            } else {
+                html += "<p class='card-subtitle mb-2 text-muted'>Belum Selesai</p>";
+            }
+            html += "<p class='card-text'>"+task.fields.description+"</p><div class='btn-group mt-auto' role='group'>";
+            if (task.fields.is_finished) {
+                html += "<a onclick='changeStatus("+task.pk+")' class='btn-hapus btn btn-success'>Belum Selesai</a>";
+            } else {
+                html += "<a onclick='changeStatus("+task.pk+")' class='btn-hapus btn btn-success'>Selesai</a>";
+            }
+            html += "<a onclick='deleteTask("+task.pk+")' class='btn btn-danger'>Delete</a></div>";
+            $('.task-'+pk).html(html);
+        });
+    });
+}
+
+// Menambah task baru
+$(".btn-add-task").click(function(e) {
+    e.preventDefault();
+    $.post("/todolist/add/", {title: $('#id_title').val(), description: $('#id_description').val(), csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()}, function(data) {
+        $.each(data, function(index, task) {
+            $('.tasks').append(makeTask(task));
+        });
+    });
+});
+
+// Menghapus task
+function deleteTask(pk) {
+    $.ajax({
+        url: "/todolist/delete/"+pk,
+        method: "DELETE",
+        dataType: "json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        },
+        success: function(data) {
+            $('.task-'+pk).remove();
+        }
+    });
+}
+</script>
 
 {% endblock content %}
